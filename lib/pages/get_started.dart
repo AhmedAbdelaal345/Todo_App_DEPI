@@ -12,7 +12,7 @@ class GetStarted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen size for responsive design
+    
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -21,24 +21,24 @@ class GetStarted extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: screenSize.height * 0.05, // 5% of screen height
+              vertical: screenSize.height * 0.05, 
               horizontal: 16,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment:
-                  MainAxisAlignment.center, // Center content vertically
+                  MainAxisAlignment.center, 
               children: [
                 TextWidget(
                   text: "Welcome to UpTodo",
                   size:
                       screenSize.width *
-                      0.08, // Responsive font size (8% of screen width)
+                      0.08, 
                   weight: FontWeight.bold,
                 ),
                 SizedBox(
                   height: screenSize.height * 0.05,
-                ), // Responsive spacing
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: TextWidget(
@@ -46,19 +46,18 @@ class GetStarted extends StatelessWidget {
                         "Please login to your account or create new account to continue",
                     size:
                         screenSize.width *
-                        0.04, // Responsive font size (4% of screen width)
+                        0.04, 
                     weight: FontWeight.w200,
                   ),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
-                // Make Lottie animation size responsive
                 Lottie.asset(
                   Constants.welcomeLottie,
-                  height: screenSize.height * 0.38, // 25% of screen height
-                  width: screenSize.width * 0.5, // 50% of screen width
-                  fit: BoxFit.fill, // Use contain to prevent distortion
+                  height: screenSize.height * 0.38,
+                  width: screenSize.width * 0.5,
+                  fit: BoxFit.fill, 
                 ),
-                const Spacer(), // Flexible spacer to push buttons to bottom
+                const Spacer(), 
                 ButtonWidget(
                   text: "LOGIN",
                   backgroundColor: Constants.primaryColor,
