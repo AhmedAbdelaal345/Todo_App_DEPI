@@ -90,5 +90,11 @@ Status: ✅ Completed
 📥 Download
 👉 Download APK (Upload to GitHub Releases or Google Drive and update this link)
 
+👨‍💻 Contributors
+Ahmed Abdel Aal (Author & Developer)
+
 📌 License
 This project is licensed under the MIT License.
+
+yaml
+Copy code
