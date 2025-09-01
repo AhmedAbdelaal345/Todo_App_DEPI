@@ -38,6 +38,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        title: Image.asset(Constants.logo, height: 50),
+        centerTitle: true,
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -99,7 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                                 email: emailController.text.trim(),
                                 password: passwordController.text,
                               );
-                              context.read<TodoCubit>().setUserData(email:  credential.user!.email!,password:  passwordController.text, uid: credential.user!.uid);
+                          context.read<TodoCubit>().setUserData(
+                            email: credential.user!.email!,
+                            password: passwordController.text,
+                            uid: credential.user!.uid,
+                          );
                           if (credential.user != null) {
                             Navigator.pushReplacementNamed(
                               context,
@@ -178,9 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 
               SizedBox(height: MediaQuery.of(context).size.height * 0.04),
               GoogleSignInButton(
-                                  // Navigate to home page after successful Google sign-in
-
-                  
+                // Navigate to home page after successful Google sign-in
                 onError: (error) {
                   Fluttertoast.showToast(
                     msg: "Google Sign-In Failed: $error",

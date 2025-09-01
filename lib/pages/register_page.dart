@@ -133,6 +133,8 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        title: Image.asset(Constants.logo,height: 60,),
+        centerTitle: true,
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -141,133 +143,131 @@ class _RegisterPageState extends State<RegisterPage> {
           },
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: formKey, // CRUCIAL: Connect the formKey to the Form
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 40),
-
-                const Text(
-                  'Create Account',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
+        child: Form(
+          key: formKey, // CRUCIAL: Connect the formKey to the Form
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 40),
+      
+              const Text(
+                'Create Account',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+      
+              const SizedBox(height: 8),
+      
+              const Text(
+                'Sign up to get started',
+                style: TextStyle(color: Colors.grey, fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+      
+              const SizedBox(height: 50),
+      
+              TextFormFieldWidget(
+                controller: emailController,
+                isPassword: false,
+                labelText: "Email",
+                hintText: "Enter your email",
+                formKey: formKey,
+              ),
+      
+              const SizedBox(height: 20),
+      
+              TextFormFieldWidget(
+                controller: passwordController,
+                isPassword: true,
+                labelText: "Password",
+                hintText: "Enter your password",
+                formKey: formKey,
+              ),
+      
+              const SizedBox(height: 20),
+      
+              // Confirm Password Field
+              TextFormFieldWidget(
+                controller: confirmPasswordController,
+                isPassword: true,
+                labelText: "Confirm Password",
+                hintText: "Confirm your password",
+                formKey: formKey,
+              ),
+      
+              const SizedBox(height: 30),
+      
+              Row(
+                children: [
+                  const Icon(
+                    Icons.info_outline,
+                    color: Colors.grey,
+                    size: 16,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-
-                const SizedBox(height: 8),
-
-                const Text(
-                  'Sign up to get started',
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-
-                const SizedBox(height: 50),
-
-                TextFormFieldWidget(
-                  controller: emailController,
-                  isPassword: false,
-                  labelText: "Email",
-                  hintText: "Enter your email",
-                  formKey: formKey,
-                ),
-
-                const SizedBox(height: 20),
-
-                TextFormFieldWidget(
-                  controller: passwordController,
-                  isPassword: true,
-                  labelText: "Password",
-                  hintText: "Enter your password",
-                  formKey: formKey,
-                ),
-
-                const SizedBox(height: 20),
-
-                // Confirm Password Field
-                TextFormFieldWidget(
-                  controller: confirmPasswordController,
-                  isPassword: true,
-                  labelText: "Confirm Password",
-                  hintText: "Confirm your password",
-                  formKey: formKey,
-                ),
-
-                const SizedBox(height: 30),
-
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.info_outline,
-                      color: Colors.grey,
-                      size: 16,
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'By registering, you agree to our Terms of Service and Privacy Policy',
+                      style: TextStyle(color: Colors.grey[400], fontSize: 12),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'By registering, you agree to our Terms of Service and Privacy Policy',
-                        style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                  ),
+                ],
+              ),
+      
+              const SizedBox(height: 30),
+      
+              ButtonWidget(
+                onPressed: isLoading ? null : handleRegister,
+                text: isLoading ? "Creating Account..." : "Register",
+                backgroundColor: Constants.primaryColor,
+                borderColor: Constants.primaryColor,
+              ),
+              const SizedBox(height: 20),
+              GoogleSignInButton(
+                
+                onError: (error) {
+                  Fluttertoast.showToast(
+                    msg: error,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                },
+                
+              ),
+      
+              const SizedBox(height: 20),
+      
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account? ",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, LoginPage.id);
+                    },
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                ),
-
-                const SizedBox(height: 30),
-
-                ButtonWidget(
-                  onPressed: isLoading ? null : handleRegister,
-                  text: isLoading ? "Creating Account..." : "Register",
-                  backgroundColor: Constants.primaryColor,
-                  borderColor: Constants.primaryColor,
-                ),
-                const SizedBox(height: 20),
-                GoogleSignInButton(
-                  
-                  onError: (error) {
-                    Fluttertoast.showToast(
-                      msg: error,
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
-                  },
-                  
-                ),
-
-                const SizedBox(height: 20),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, LoginPage.id);
-                      },
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

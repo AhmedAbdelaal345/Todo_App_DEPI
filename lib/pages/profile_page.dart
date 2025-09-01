@@ -15,9 +15,15 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text(
-          'Profile Page',
-          style: TextStyle(color: Colors.white),
+        title: Row(
+          children: [
+            Image.asset(Constants.logo, height: 30),
+            SizedBox(width: 10,),
+            const Text(
+              'Profile Page',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ],
         ),
         centerTitle: true,
         leading: IconButton(

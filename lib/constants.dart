@@ -9,4 +9,5 @@ class Constants {
   static final String emptyLottie = 'assets/lottie/empty.json';
   static final String notFoundLottie = 'assets/lottie/NotFound.json';
   static final String welcomeLottie = 'assets/lottie/Welcome.json';
+  static final String logo = "assets/image/appIcon.png";
 }
