@@ -160,32 +160,37 @@ class HomePage extends StatelessWidget {
                     final List<TodoModel> todos = state.todos;
 
                     if (todos.isEmpty) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.asset(
-                              Constants.emptyLottie,
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.fill,
+                      return SingleChildScrollView(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Column(
+                              children: [
+                                Lottie.asset(
+                                  Constants.emptyLottie,
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.fill,
+                                ),
+                                Text(
+                                  'No todos yet',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Add a task to get started!',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              'No todos yet',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Add a task to get started!',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       );
                     }

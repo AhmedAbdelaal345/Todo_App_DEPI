@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todoapp/constants.dart';
 import 'package:todoapp/helper/button_widget.dart';
 import 'package:todoapp/helper/google_button.dart';
 import 'package:todoapp/helper/text_form_field_widget.dart';
+import 'package:todoapp/manager/cubit/todo_cubit.dart';
 import 'package:todoapp/pages/login_page.dart';
 import 'package:todoapp/pages/wrapper_page.dart';
 
@@ -67,8 +69,13 @@ class _RegisterPageState extends State<RegisterPage> {
         // Optionally send email verification
         await credential.user!.sendEmailVerification();
 
+        context.read<TodoCubit>().setUserData(
+          email: credential.user!.email!,
+          password: passwordController.text,
+          uid: credential.user!.uid,
+        );
         // Navigate to login page or home page
-        Navigator.pushNamed(context, WrapperPage.id); 
+        Navigator.pushNamed(context, WrapperPage.id);
 
         Fluttertoast.showToast(
           msg:
@@ -133,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Image.asset(Constants.logo,height: 60,),
+        title: Image.asset(Constants.logo, height: 60),
         centerTitle: true,
         backgroundColor: Colors.black,
         leading: IconButton(
@@ -151,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 40),
-      
+
               const Text(
                 'Create Account',
                 style: TextStyle(
@@ -161,17 +168,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-      
+
               const SizedBox(height: 8),
-      
+
               const Text(
                 'Sign up to get started',
                 style: TextStyle(color: Colors.grey, fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-      
+
               const SizedBox(height: 50),
-      
+
               TextFormFieldWidget(
                 controller: emailController,
                 isPassword: false,
@@ -179,9 +186,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "Enter your email",
                 formKey: formKey,
               ),
-      
+
               const SizedBox(height: 20),
-      
+
               TextFormFieldWidget(
                 controller: passwordController,
                 isPassword: true,
@@ -189,9 +196,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "Enter your password",
                 formKey: formKey,
               ),
-      
+
               const SizedBox(height: 20),
-      
+
               // Confirm Password Field
               TextFormFieldWidget(
                 controller: confirmPasswordController,
@@ -200,16 +207,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "Confirm your password",
                 formKey: formKey,
               ),
-      
+
               const SizedBox(height: 30),
-      
+
               Row(
                 children: [
-                  const Icon(
-                    Icons.info_outline,
-                    color: Colors.grey,
-                    size: 16,
-                  ),
+                  const Icon(Icons.info_outline, color: Colors.grey, size: 16),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -219,9 +222,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
-      
+
               const SizedBox(height: 30),
-      
+
               ButtonWidget(
                 onPressed: isLoading ? null : handleRegister,
                 text: isLoading ? "Creating Account..." : "Register",
@@ -230,7 +233,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 20),
               GoogleSignInButton(
-                
                 onError: (error) {
                   Fluttertoast.showToast(
                     msg: error,
@@ -241,11 +243,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 16.0,
                   );
                 },
-                
               ),
-      
+
               const SizedBox(height: 20),
-      
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
